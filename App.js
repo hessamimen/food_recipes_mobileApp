@@ -14,15 +14,29 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{
-            title: "All Categories",
             headerStyle: { backgroundColor: "#351401" },
             // headerTitleStyle: { color: "white" },
             headerTintColor: "white",
             contentStyle: { backgroundColor: "#3f2f25" },
           }}
         >
-          <Stack.Screen name="MealsCategories" component={CategoriesScreen} />
-          <Stack.Screen name="MealsOverview" component={MealsOverviewScreen} />
+          <Stack.Screen
+            name="MealsCategories"
+            component={CategoriesScreen}
+            options={{
+              title: "All Categories",
+            }}
+          />
+          <Stack.Screen
+            name="MealsOverview"
+            component={MealsOverviewScreen}
+            options={({ route, navigation }) => {
+              const catId = route.params.categoryId;
+              return {
+                title: catId,
+              };
+            }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </>
